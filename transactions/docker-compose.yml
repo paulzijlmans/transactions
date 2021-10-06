@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+
+  transactions-db:
+    image: postgres:alpine
+    container_name: transactions-db
+    volumes:
+      - transactions-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=transactionsdb
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+
+  transactions:
+    build: .
+    container_name: transactions
+    environment:
+      - DB_SERVER=transactions-db
+      - POSTGRES_DB=transactionsdb
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "9000:8080"
+    links:
+      - transactions-db
+
+volumes:
+  transactions-data:
