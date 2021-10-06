@@ -17,8 +17,6 @@ CREATE TABLE transactions
     amount      NUMERIC(10, 2),
     comment     VARCHAR(400)
 );
-ALTER TABLE transactions
-    ADD CONSTRAINT fk_category_transactions FOREIGN KEY (category_id) REFERENCES categories (id);
 
 INSERT INTO categories
 VALUES (0, 'Boodschappen');
