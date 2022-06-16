@@ -1,25 +1,28 @@
 package nl.paulzijlmans.transactions.model;
 
-import lombok.Data;
-
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import java.sql.Date;
+import javax.persistence.Table;
+import lombok.Data;
 
 @Entity
 @Data
 @Table(name = "transactions")
 public class Transaction {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @ManyToOne()
-    private Category category;
-    private Date date;
-    private String description;
-    private double amount;
-    private String comment;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+  private String description;
+  private double amount;
+  private String comment;
+  @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+      CascadeType.REFRESH})
+  @JoinColumn(name = "category_id")
+  private Category category;
 }
