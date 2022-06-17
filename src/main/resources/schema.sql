@@ -1,14 +1,10 @@
-DROP TABLE IF EXISTS transactions;
-DROP TABLE IF EXISTS categories;
-
-CREATE TABLE categories
+CREATE TABLE IF NOT EXISTS categories
 (
     id   SERIAL PRIMARY KEY,
     name VARCHAR(80)
 );
-CREATE INDEX categories_name ON categories (name);
 
-CREATE TABLE transactions
+CREATE TABLE IF NOT EXISTS transactions
 (
     id          SERIAL PRIMARY KEY,
     description VARCHAR(400),

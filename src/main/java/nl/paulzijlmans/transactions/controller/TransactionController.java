@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class TransactionController {
 
-  private static final Logger logger = LoggerFactory.getLogger(TransactionsApplication.class);
+  private static final Logger logger = LoggerFactory.getLogger(TransactionController.class);
 
   private TransactionRepository transactionRepository;
 
