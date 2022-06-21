@@ -28,7 +28,7 @@ public class TransactionControllerIT {
 
   @Test
   void getTransactions() throws Exception {
-    mockMvc.perform(get("/api/v1/transactions"))
+    mockMvc.perform(get("/api/transactions"))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$", hasSize(1)));

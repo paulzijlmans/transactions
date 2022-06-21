@@ -1,25 +1,26 @@
 package nl.paulzijlmans.transactions;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import nl.paulzijlmans.transactions.controller.CategoryController;
-import nl.paulzijlmans.transactions.controller.TransactionController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class TransactionsApplicationTests {
 
   @Autowired
-  public TransactionController transactionController;
-
-  @Autowired
-  public CategoryController categoryController;
+  private TestRestTemplate testRestTemplate;
 
   @Test
   void contextLoads() {
-    assertNotNull(transactionController, "Transaction controller should be initialized.");
-    assertNotNull(categoryController, "Category controller should be initialized.");
+    ResponseEntity<Object> actuatorResult =
+        this.testRestTemplate.getForEntity("/actuator/health", Object.class);
+
+    assertEquals(HttpStatus.OK, actuatorResult.getStatusCode());
   }
 }
