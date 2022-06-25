@@ -1,10 +1,10 @@
-CREATE TABLE IF NOT EXISTS category
+CREATE TABLE IF NOT EXISTS categories
 (
     id   SERIAL PRIMARY KEY,
     name VARCHAR(80)
 );
 
-CREATE TABLE IF NOT EXISTS transaction
+CREATE TABLE IF NOT EXISTS transactions
 (
     id          SERIAL PRIMARY KEY,
     description VARCHAR(400),
